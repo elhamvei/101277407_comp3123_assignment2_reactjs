@@ -20,6 +20,7 @@ routes.post('/signup', async (req, res) => {
         await newUser.save()
         res.status(201).send(newUser)
     } catch (error) {
+        console.log(error);
         if(error.code === 11000)
             res.status(401).json({
                 status: false,

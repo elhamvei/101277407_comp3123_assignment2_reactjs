@@ -14,6 +14,8 @@ const EmployeeView = (props) => {
     const load = async () => {
         const id = searchParams.get('id');
         const response = await axios.get('http://localhost:8081/api/emp/employees/'+id);
+        if(response.data.salary && response.data.salary.$numberDecimal)
+            response.data.salary = response.data.salary.$numberDecimal;
         setEmployee(response.data)
       }
 
@@ -73,7 +75,7 @@ const EmployeeView = (props) => {
                                 className="input-control"
                                 type="number"
                                 name="salary"
-                                value={salary.$numberDecimal}
+                                value={salary}
                                 disabled
                             />
                         </Form.Group>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Table from 'react-bootstrap/Table';
@@ -28,7 +28,9 @@ const EmployeesList = () => {
 
 
   return <div className="emplist">
-    <Button variant="primary" className='mb-5' onClick={()=> navigate('/form')}>Add Employee</Button>
+                <Card className="card">
+                <Card.Body><>
+    <Button variant="primary" className='mb-3' onClick={()=> navigate('/form')}>Add Employee</Button>
     <br />
     <Table striped bordered hover>
       <thead>
@@ -59,7 +61,7 @@ const EmployeesList = () => {
         </tr>
         ))}
       </tbody>
-    </Table>
+    </Table></></Card.Body></Card>
   </div>
 }
 

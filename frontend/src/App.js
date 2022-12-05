@@ -6,6 +6,8 @@ import EmployeesList from './components/EmployeesList';
 import EmployeeForm from './components/EmployeeForm';
 import './App.css';
 import EmployeeView from './components/EmployeeView';
+import Signup from './components/Signup';
+import Toolbar from './components/Toolbar';
 
 
 function App() {
@@ -15,21 +17,28 @@ function App() {
   }
 
   return (
-    <>
+    <div>
+    <Toolbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
       {isAuthenticated ?
-      <>
-        <Routes>
+        <>
+          <Routes>
             <Route index element={<EmployeesList />} />
             <Route path="employees" element={<EmployeesList />} />
             <Route path="form" element={<EmployeeForm />} />
             <Route path="view" element={<EmployeeView />} />
             <Route path="*" element={<p>There's nothing here: 404!</p>} />
-        </Routes>
+          </Routes>
         </>
         :
-        <Login authticateAction={Authenticated} />
+        <Routes>
+          <Route index element={<Login authticateAction={Authenticated} />} />
+          <Route path="login" element={<Login authticateAction={Authenticated} />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="*" element={<p>You can not access to this page</p>} />
+        </Routes>
+
       }
-    </>
+    </div>
   );
 }
 
