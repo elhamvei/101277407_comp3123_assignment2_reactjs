@@ -9,6 +9,7 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
 const EmployeeForm = (props) => {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
+    const id = searchParams.get('id');
     const [employee, setEmployee] = useState({
         first_name: props.employee ? props.employee.first_name : '',
         last_name: props.employee ? props.employee.last_name : '',
@@ -21,7 +22,7 @@ const EmployeeForm = (props) => {
     const { first_name, last_name, email, gender, salary } = employee;
 
     const load = async () => {
-        const id = searchParams.get('id');
+        
         if (id) {
             const response = await axios.get(baseUrl+'/api/emp/employees/' + id);
             response.data.salary = response.data.salary?.$numberDecimal;
@@ -35,7 +36,6 @@ const EmployeeForm = (props) => {
 
     const handleOnSubmit = (event) => {
         event.preventDefault();
-        const id = searchParams.get('id');
         if (id) {
             updateEmployee(id);
         }
@@ -61,10 +61,11 @@ const EmployeeForm = (props) => {
             [name]: value
         }));
     };
+    console.log('id',id);
 
     return (
         <div className="main-form">
-            <h1>Add Employee</h1>
+            <h1>{id? 'Update' : 'Add'} Employee</h1>
             <br />
             {errorMsg && <p className="errorMsg">{errorMsg}</p>}
             <Card className="card">
